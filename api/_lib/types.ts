@@ -32,6 +32,8 @@ export interface RescueTeam {
   status: TeamStatus;
   distanceKm: number; // distance to primary incident
   members: number;
+  lat?: number;
+  lng?: number;
 }
 
 export type FacilityStatus = "AVAILABLE" | "LIMITED" | "FULL";
@@ -42,6 +44,8 @@ export interface Hospital {
   capacityUsedPct: number; // 0-100
   status: FacilityStatus;
   distanceKm: number;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Shelter {
@@ -58,6 +62,7 @@ export interface Road {
   name: string;
   status: RoadStatus;
   connectsTo: string; // human-readable, e.g. "Zone A -> Shelter S2"
+  coords?: Coordinates[];
 }
 
 /** The full live picture. Frontend holds this; backend is stateless. */

@@ -110,6 +110,7 @@ button { cursor: pointer; }
 .legend-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .legend-red { background: #d35454; } .legend-blue { background: #3979ad; } .legend-green { background: #4d9b70; }
 .legend-line { width: 14px; border-top: 2px dashed #d35454; }
+.legend-open-line { border-top: 2px solid #48a16c; }
 .hospitals-panel, .resource-panel { min-height: 441px; }
 .panel-heading { padding-bottom: 14px; border-bottom: 1px solid var(--border-light); }
 .hospital-list, .resource-list, .activity-list { display: flex; flex-direction: column; }
@@ -128,6 +129,12 @@ button { cursor: pointer; }
 .ai-icon, .utility-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 5px; flex: none; }
 .ai-icon { color: #a27729; background: #fff5dc; } .utility-icon { color: #4b7d9f; background: #edf5fb; }
 .plan-summary { color: #607184; font-size: 11px; line-height: 1.55; padding: 14px 0 12px; max-width: 700px; }
+.plan-assignments { display: flex; flex-wrap: wrap; align-items: center; gap: 9px 18px; padding-top: 13px; border-top: 1px solid var(--border-light); color: #526579; font-size: 10px; }
+.plan-assignments span { display: flex; gap: 5px; }
+.plan-assignments strong { color: #92a0ae; font-weight: 600; }
+.empty-state { color: #94a0ad; font-size: 10px; margin: 15px 0 3px; }
+.error-state { color: #b94d4d; font-size: 10px; margin: 12px 0 0; }
+.fallback-badge { color: #af6e21; background: #fff5e7; border: 1px solid #f1dbb9; border-radius: 3px; padding: 5px 7px; font-size: 9px; font-weight: 700; }
 .plan-action { display: flex; align-items: center; gap: 10px; min-height: 47px; border-top: 1px solid var(--border-light); }
 .plan-number { color: #94a1ae; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; width: 19px; }
 .plan-action-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
@@ -159,6 +166,8 @@ button { cursor: pointer; }
 .simulator-timeline input { width: 100%; margin: 13px 0 5px; accent-color: #2c6ca4; height: 4px; }
 .timeline-labels { color: #adb7c0; font-size: 8px; }
 .simulator-actions { border-top: 1px solid var(--border-light); padding-top: 14px; }
+.simulator-event-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 17px; }
+.button:disabled { cursor: not-allowed; opacity: .55; }
 .what-if-tabs { display: flex; gap: 4px; padding: 14px 0 12px; overflow-x: auto; }
 .what-if-tabs button { color: #8794a2; background: #f7f9fb; border: 1px solid var(--border-light); border-radius: 3px; padding: 7px 9px; white-space: nowrap; font-size: 9px; font-weight: 650; }
 .what-if-tabs button.selected { color: #346e9f; border-color: #b6d0e5; background: #edf5fb; }
