@@ -1,3 +1,15 @@
-import { rescueTeams } from '../data/mockData'
 import StatusBadge from '../components/common/StatusBadge'
-export default function RescueTeamsPage() { return <PlaceholderPage eyebrow="Field operations" title="Rescue teams" description="View field units, specialties, and deployment status." rows={rescueTeams.map((item) => [item.name, item.specialty, `${item.members} responders`, item.location, item.eta, <StatusBadge tone={item.status === 'Deployed' ? 'blue' : item.status === 'Standby' ? 'slate' : 'orange'}>{item.status}</StatusBadge>])} headings={['Team', 'Specialty', 'Size', 'Location', 'ETA', 'Status']} /> }
+import { useEmergencyStore } from '../store/emergencyStore'
+import PlaceholderPage from './PlaceholderPage'
+
+export default function RescueTeamsPage() {
+	const { emergencyState, loading, error } = useEmergencyStore()
+	const teams = emergencyState?.teams || []
+	const rows = teams.map((team) => [
+		team.name,
+		`${team.members} responders`,
+		`${team.distanceKm} km`,
+		<StatusBadge key={`${team.id}-status`} tone={team.status === 'AVAILABLE' ? 'green' : team.status === 'DISPATCHED' ? 'blue' : 'orange'}>{team.status}</StatusBadge>,
+	])
+	return <PlaceholderPage eyebrow="Field operations" title="Rescue teams" description="View team size, distance from the primary incident, and availability." rows={rows} headings={['Team', 'Size', 'Distance', 'Status']} loading={loading} error={error} updatedAt={emergencyState?.updatedAt} />
+}
