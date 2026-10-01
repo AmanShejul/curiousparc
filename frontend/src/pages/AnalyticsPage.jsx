@@ -1,2 +1,17 @@
-import { Activity, ArrowDownRight, ArrowUpRight, Clock3, UsersRound } from 'lucide-react'
-export default function AnalyticsPage() { return <div className="generic-page"><div className="page-heading"><div><div className="eyebrow">Performance review</div><h1>Analytics</h1><p>Operational trends and response performance will appear here.</p></div></div><div className="analytics-placeholder panel"><div className="analytics-bars">{[42, 67, 51, 74, 64, 86, 72, 91, 78, 66, 82, 94].map((height, i) => <span key={i} style={{ height: `${height}%` }} />)}</div><div className="chart-labels"><span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span></div></div><div className="stats-grid analytics-stats"><div className="stat-card"><div className="stat-card-top"><span className="stat-label">Median response time</span><span className="stat-icon stat-icon-green"><Clock3 size={17} /></span></div><div className="stat-value">08:42</div><div className="stat-meta"><span className="trend-down"><ArrowDownRight size={13} /> 12% vs. last week</span></div></div><div className="stat-card"><div className="stat-card-top"><span className="stat-label">Incidents resolved</span><span className="stat-icon stat-icon-blue"><Activity size={17} /></span></div><div className="stat-value">86%</div><div className="stat-meta"><span className="trend-up"><ArrowUpRight size={13} /> 8% vs. last week</span></div></div><div className="stat-card"><div className="stat-card-top"><span className="stat-label">Team utilization</span><span className="stat-icon stat-icon-orange"><UsersRound size={17} /></span></div><div className="stat-value">74%</div><div className="stat-meta">12 of 18 units active</div></div></div></div> }
+import { Activity, Hospital, Route, UsersRound } from 'lucide-react'
+import StatCard from '../components/dashboard/StatCard'
+import { useEmergencyStore } from '../store/emergencyStore'
+
+export default function AnalyticsPage() {
+	const state = useEmergencyStore((store) => store.emergencyState)
+	const incidents = state?.incidents || []
+	const teams = state?.teams || []
+	const hospitals = state?.hospitals || []
+	const roads = state?.roads || []
+	const resolvedIncidents = incidents.filter((incident) => incident.status === 'RESOLVED').length
+	const activeTeams = teams.filter((team) => team.status === 'DISPATCHED').length
+	const averageCapacity = hospitals.length ? Math.round(hospitals.reduce((total, hospital) => total + (hospital.capacityUsedPct ?? hospital.capacityPct ?? 0), 0) / hospitals.length) : 0
+	const blockedRoads = roads.filter((road) => road.status === 'BLOCKED').length
+	const affectedPeople = incidents.reduce((total, incident) => total + incident.affectedPeople, 0)
+	return <div className="generic-page"><div className="page-heading"><div><div className="eyebrow">Performance review</div><h1>Analytics</h1><p>Summary calculated from the current emergency state.</p></div></div>{state ? <div className="stats-grid analytics-stats"><StatCard label="People affected" value={affectedPeople} icon={UsersRound} tone="orange" /><StatCard label="Incidents resolved" value={`${resolvedIncidents} / ${incidents.length}`} icon={Activity} tone="blue" /><StatCard label="Teams dispatched" value={`${activeTeams} / ${teams.length}`} icon={UsersRound} tone="green" /><StatCard label="Average hospital capacity" value={`${averageCapacity}%`} icon={Hospital} tone="red" /><StatCard label="Blocked roads" value={`${blockedRoads} / ${roads.length}`} icon={Route} tone="orange" /></div> : <p className="empty-state">Emergency state is not available yet.</p>}</div>
+}
