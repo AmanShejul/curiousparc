@@ -1,0 +1,3 @@
+import { hospitals } from '../data/mockData'
+import StatusBadge from '../components/common/StatusBadge'
+export default function HospitalsPage() { return <PlaceholderPage eyebrow="Medical network" title="Hospitals" description="Monitor receiving facilities, bed capacity, and trauma capabilities." rows={hospitals.map((item) => [item.name, item.trauma, `${item.beds} / ${item.totalBeds}`, `${item.capacity}% utilized`, item.distance, <StatusBadge tone={item.status === 'Available' ? 'green' : 'blue'}>{item.status}</StatusBadge>])} headings={['Facility', 'Trauma', 'Beds', 'Utilization', 'Distance', 'Status']} /> }

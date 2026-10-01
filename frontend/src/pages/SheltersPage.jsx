@@ -1,0 +1,3 @@
+import { shelters } from '../data/mockData'
+import StatusBadge from '../components/common/StatusBadge'
+export default function SheltersPage() { return <PlaceholderPage eyebrow="Community support" title="Shelters" description="Coordinate evacuation centers and monitor occupancy." rows={shelters.map((item) => [item.name, item.location, `${item.occupancy} / ${item.capacity}`, `${Math.round(item.occupancy / item.capacity * 100)}% occupied`, <StatusBadge tone={item.status === 'Open' ? 'green' : 'orange'}>{item.status}</StatusBadge>])} headings={['Shelter', 'Location', 'Occupancy', 'Load', 'Status']} /> }
