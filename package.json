@@ -1,0 +1,1 @@
+{"dependencies":{"@google/generative-ai":"^0.24.0","@vercel/node":"^5.0.0"},"devDependencies":{"typescript":"^5.6.0"},"name":"curiousparc-api","private":true,"scripts":{"typecheck":"tsc --noEmit"},"type":"module","version":"1.0.0"}

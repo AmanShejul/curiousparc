@@ -1,0 +1,1 @@
+{"$schema":"https://openapi.vercel.sh/vercel.json","buildCommand":"npm run build --prefix frontend","functions":{"api/*.ts":{"maxDuration":10}},"outputDirectory":"frontend/dist"}
